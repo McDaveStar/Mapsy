@@ -1,5 +1,7 @@
 <h1 align="center">
-  <img src="https://img.shields.io/badge/Mapsy-v1.0-blue?style=for-the-badge&logo=map&logoColor=white" alt="Mapsy Badge"/>
+  <a href="https://mapsy-eight.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Mapsy-v1.0-blue?style=for-the-badge&logo=map&logoColor=white" alt="Mapsy Badge"/>
+  </a>
 </h1>
 
 <h3 align="center">🗺️ Smart Student Location Discovery Platform</h3>
