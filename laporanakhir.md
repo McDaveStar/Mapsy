@@ -21,19 +21,28 @@
 
 ### **A. Latar Belakang & Masalah (Core Problem)**
 Bagi mahasiswa perkotaan yang menuntut efisiensi tinggi, menemukan lokasi fisik yang tepat untuk belajar, mengerjakan tugas kelompok, mencetak dokumen, atau sekadar mencari makan dengan harga terjangkau merupakan tantangan sehari-hari yang cukup menyita waktu. Peta digital yang ada saat ini (seperti Google Maps atau Apple Maps) dirancang untuk kebutuhan komersial skala besar. Beberapa kelemahan utama peta konvensional dari sudut pandang mahasiswa meliputi:
-1. **Tidak adanya filter situasional mahasiswa**: Tidak ada filter pencarian untuk "banyak colokan", "suasana tenang/sepi untuk nugas", atau "tempat print terdekat".
-2. **Komersialisasi hasil pencarian**: Bisnis dengan anggaran iklan besar selalu menempati peringkat teratas, menenggelamkan tempat-tempat kecil bernilai tinggi bagi mahasiswa (*hidden gems*).
+1. **Tidak adanya filter pencarian berbasis situasi mahasiswa**: Peta konvensional tidak menyediakan amenitas khusus seperti "banyak colokan", "suasana tenang/sepi untuk nugas", atau "tempat print terdekat".
+2. **Komersialisasi hasil pencarian**: Bisnis dengan anggaran iklan besar menempati peringkat teratas, menenggelamkan tempat-tempat kecil bernilai tinggi bagi mahasiswa (*hidden gems*).
 3. **Informasi harga yang tidak akurat**: Indikator harga seperti `$$` tidak mencerminkan anggaran riil mahasiswa (misal: mencari makan siang di bawah Rp30.000).
-4. **Data tag yang mudah usang**: Kecepatan internet Wi-Fi kafe, jam operasional sesungguhnya, atau tingkat kebisingan sering berubah tanpa adanya pembaruan cepat dari komunitas pengguna.
+4. **Data tag yang mudah usang**: Kecepatan internet Wi-Fi kafe, ketersediaan colokan listrik, jam operasional sesungguhnya, atau tingkat kebisingan sering berubah tanpa adanya pembaruan cepat dari komunitas pengguna.
 
-Berdasarkan survei pendahuluan yang dilakukan terhadap 12 responden mahasiswa, sebanyak 50% menyatakan kesulitan menemukan toko atau fasilitas spesifik di sekitar kos mereka karena ketidaktahuan informasi dan terbatasnya ketersediaan produk/fasilitas.
+Berdasarkan survei pendahuluan yang dilakukan terhadap 12 responden mahasiswa, sebanyak 50% menyatakan kesulitan menemukan tempat belajar kondusif (seperti kafe tenang dengan Wi-Fi stabil) atau fasilitas pendukung akademik (seperti tempat fotokopi/cetak) di sekitar wilayah kampus karena ketidaktahuan informasi riil mengenai amenitas tempat tersebut.
 
 ### **B. Solusi yang Diusulkan (Proposed Solution)**
-Untuk mengatasi keterbatasan tersebut, dikembangkan **Mapsy**, sebuah Single Page Application (SPA) berbasis peta interaktif yang berfokus pada visualisasi hiper-lokal di sekitar kampus (contoh uji coba: area BINUS University Bandung Paskal, ITB, dan UNPAD Dipatiukur). Solusi utama yang dihadirkan platform ini mencakup:
+Untuk mengatasi keterbatasan tersebut, dikembangkan **Mapsy**, sebuah Single Page Application (SPA) berbasis peta interaktif yang berfokus pada visualisasi lokasi hiper-lokal di sekitar kampus (contoh uji coba: area BINUS University Bandung Paskal, ITB, dan UNPAD Dipatiukur). Solusi utama yang dihadirkan platform ini mencakup:
 * **Smart Search by Situation**: Pengguna cukup memasukkan kalimat natural (seperti: *"butuh kafe yang tenang untuk nugas sampai malam"*). Mesin parser di backend akan secara otomatis menerjemahkannya menjadi tag terstruktur (`Quiet`, `Good Wi-Fi`, `24 hours`) tanpa biaya API AI yang mahal.
 * **Community Validation (Sistem Anti-Data Usang)**: Setiap tag pada suatu lokasi dapat di-upvote atau di-downvote oleh mahasiswa yang telah masuk (login) menggunakan email kampus mereka. Tag yang mendapatkan skor negatif akan otomatis disembunyikan dari peta.
 * **Algoritma Rating Berbobot (Temporal Decay)**: Sistem ulasan memberikan bobot ganda (2.0x) pada ulasan 30 hari terakhir dibanding ulasan lama untuk menjaga relevansi situasi terkini suatu tempat.
 * **Zero-Cost Cache Strategy**: Server meng-cache data Google Places API secara lokal untuk meminimalisasi biaya operasional.
+
+### **C. Rumusan Masalah & Tujuan Penelitian**
+Berdasarkan latar belakang di atas, rumusan masalah dalam penelitian ini adalah:
+1. Bagaimana merancang platform pemetaan geospasial hiper-lokal yang dapat memberikan rekomendasi tempat secara efisien sesuai dengan situasi spesifik mahasiswa?
+2. Bagaimana mempertahankan keakuratan tag amenitas fasilitas tempat belajar mahasiswa tanpa bergantung pada moderator admin manual?
+
+Adapun tujuan dari penelitian ini adalah:
+1. Membangun aplikasi web Mapsy dengan fitur pencarian kalimat alami (*Smart Search by Situation*) dan sistem pemeringkatan kesesuaian (*Smart Ranking*).
+2. Mengimplementasikan mekanisme crowdsourcing berbasis upvote/downvote (*Community Validation*) untuk memvalidasi kualitas tag secara demokratis oleh sesama mahasiswa.
 
 ---
 
