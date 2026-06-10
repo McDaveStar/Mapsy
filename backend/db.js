@@ -40,7 +40,7 @@ if (SUPABASE_URL && SUPABASE_KEY) {
 }
 
 // Local mock database helpers
-const mockDbPath = path.join(__dirname, 'data', 'mockDb.json');
+const mockDbPath = path.join(process.cwd(), 'backend', 'data', 'mockDb.json');
 
 function readMockDb() {
     try {

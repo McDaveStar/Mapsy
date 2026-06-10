@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // 1. Serve frontend single-page application statically
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(process.cwd(), 'frontend')));
 
 // Helper for https GET
 const https = require('https');
