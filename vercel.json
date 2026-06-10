@@ -2,7 +2,10 @@
   "version": 2,
   "functions": {
     "backend/server.js": {
-      "includeFiles": "frontend/**"
+      "includeFiles": [
+        "frontend/**",
+        "backend/data/**"
+      ]
     }
   },
   "routes": [
