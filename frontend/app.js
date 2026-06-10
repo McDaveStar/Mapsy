@@ -22,11 +22,11 @@ let appState = {
 
 // Initialize application on load
 document.addEventListener('DOMContentLoaded', () => {
-    initLucideIcons();
-    initMap();
-    initAuthUI();
-    initEventListeners();
-    fetchPlaces(); // Initial load of all places
+    try { initLucideIcons(); } catch (e) { console.error("Error loading Lucide icons:", e); }
+    try { initMap(); } catch (e) { console.error("Error initializing Leaflet map:", e); }
+    try { initAuthUI(); } catch (e) { console.error("Error initializing Auth UI:", e); }
+    try { initEventListeners(); } catch (e) { console.error("Error binding event listeners:", e); }
+    try { fetchPlaces(); } catch (e) { console.error("Error fetching places:", e); }
 });
 
 // Initialize Lucide Icons
@@ -77,6 +77,10 @@ function showToast(message, type = 'info') {
 
 // Initialize Leaflet Map centered on Bandung ITB
 function initMap() {
+    if (typeof L === 'undefined') {
+        console.warn("Leaflet (L) is not loaded. Map initialization skipped.");
+        return;
+    }
     // Attempt to get user's actual location if they allow it
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
@@ -363,6 +367,7 @@ function renderRecommendations() {
 
 // Render markers on the map
 function renderMarkers() {
+    if (typeof L === 'undefined' || !appState.map) return;
     // Clear existing markers
     appState.markers.forEach(m => appState.map.removeLayer(m));
     appState.markers = [];
@@ -542,9 +547,12 @@ async function selectPlace(placeId, marker = null) {
 // Populate Bottom Sheet UI Elements
 function populateBottomSheet(place) {
     // Calc distance (rough text or straight calculation)
-    const distanceMeters = Math.round(place.latitude ? 
-        L.latLng(KAMPUS_BINUS_COORDS.lat, KAMPUS_BINUS_COORDS.lng).distanceTo(L.latLng(place.latitude, place.longitude)) : 0
-    );
+    let distanceMeters = 0;
+    if (typeof L !== 'undefined' && place.latitude) {
+        distanceMeters = Math.round(
+            L.latLng(KAMPUS_BINUS_COORDS.lat, KAMPUS_BINUS_COORDS.lng).distanceTo(L.latLng(place.latitude, place.longitude))
+        );
+    }
 
     const coverImg = document.getElementById('placeCoverImg');
     if (coverImg) {
