@@ -1,0 +1,618 @@
+{
+  "places": [
+    {
+      "id": 1,
+      "name": "Kopi Toko Djawa (Dago)",
+      "description": "Tempat ngopi legendaris yang nyaman, cocok untuk laptopan santai. Memiliki nuansa retro yang estetik.",
+      "lat": -6.8892,
+      "lng": 107.6159,
+      "avg_price_tier": 2,
+      "google_place_id": "chIJDagoDjawaPlace1"
+    },
+    {
+      "id": 2,
+      "name": "Warung Nasi SPG Dipatiukur",
+      "description": "Nasi ayam legendaris porsi kuli dengan sambal hijau pedas mantap. Sangat ramah di kantong mahasiswa.",
+      "lat": -6.8945,
+      "lng": 107.6185,
+      "avg_price_tier": 1,
+      "google_place_id": "chIJspgDipatiukur2"
+    },
+    {
+      "id": 3,
+      "name": "Kineruku",
+      "description": "Perpustakaan, toko buku, dan rumah makan indie yang sangat sunyi dan tenang. Sangat kondusif untuk membaca atau nugas serius.",
+      "lat": -6.8778,
+      "lng": 107.6015,
+      "avg_price_tier": 2,
+      "google_place_id": "chIJkinerukuPlace3"
+    },
+    {
+      "id": 4,
+      "name": "McDonald's Dago (24 Jam)",
+      "description": "McD 24 jam dengan Wi-Fi kencang dan banyak colokan. Tempat andalan mahasiswa ITB begadang ngerjain tugas kelompok.",
+      "lat": -6.8864,
+      "lng": 107.6146,
+      "avg_price_tier": 2,
+      "google_place_id": "chIJmcdDagoPlace4"
+    },
+    {
+      "id": 5,
+      "name": "Fotocopy & Printing Murni Dipatiukur",
+      "description": "Jasa fotokopi, cetak dokumen, jilid skripsi murah meriah dan cepat. Buka hingga larut malam.",
+      "lat": -6.8935,
+      "lng": 107.618,
+      "avg_price_tier": 1,
+      "google_place_id": "chIJprintMurni5"
+    },
+    {
+      "id": 6,
+      "name": "Kantin Salman ITB",
+      "description": "Kantin di kompleks Masjid Salman ITB. Menyediakan makanan prasmanan sehat, murah, dan suasananya tenang di selasar masjid.",
+      "lat": -6.893,
+      "lng": 107.6105,
+      "avg_price_tier": 1,
+      "google_place_id": "chIJsalmanIitb6"
+    },
+    {
+      "id": 7,
+      "name": "Upnormal Coffee Roasters Dipatiukur",
+      "description": "Kafe luas dua lantai dengan banyak sekali colokan di setiap meja dan Wi-Fi handal. Favorit mahasiswa UNPAD dan ITB.",
+      "lat": -6.8988,
+      "lng": 107.6174,
+      "avg_price_tier": 2,
+      "google_place_id": "chIJupnormalDipatiukur7"
+    },
+    {
+      "id": 8,
+      "name": "Nimna Book Cafe",
+      "description": "Kafe buku tersembunyi yang tenang dan damai. Cocok buat yang mau fokus belajar tanpa kebisingan kota.",
+      "lat": -6.8845,
+      "lng": 107.5912,
+      "avg_price_tier": 2,
+      "google_place_id": "chIJnimnaBook8"
+    },
+    {
+      "id": 9,
+      "name": "Lo.Ka.Si Coworking & Space",
+      "description": "Ruang kerja bersama dengan internet super cepat, AC dingin, dan lingkungan kerja yang profesional. Ada kafe di dalamnya.",
+      "lat": -6.89,
+      "lng": 107.616,
+      "avg_price_tier": 3,
+      "google_place_id": "chIJlokasiCowork9"
+    },
+    {
+      "id": 10,
+      "name": "Cups Coffee & Kitchen",
+      "description": "Kafe bertema industrial estetik dengan hidangan kopi premium dan brunch lezat. Cocok untuk meeting kelompok.",
+      "lat": -6.9034,
+      "lng": 107.6155,
+      "avg_price_tier": 3,
+      "google_place_id": "chIJcupsKitchen10"
+    },
+    {
+      "id": 11,
+      "name": "Starbucks Dipatiukur",
+      "description": "Starbucks yang luas dan nyaman di dekat halte DAMRI DU. Sering ramai mahasiswa dengan laptopnya.",
+      "lat": -6.895,
+      "lng": 107.6168,
+      "avg_price_tier": 4,
+      "google_place_id": "chIJstarbucksDu11"
+    },
+    {
+      "id": 12,
+      "name": "Kopi Anjis Dipatiukur",
+      "description": "Kafe santai semi-outdoor legendaris di Dipatiukur. Terkenal dengan roti bakar dan kopi saring susu yang murah.",
+      "lat": -6.8962,
+      "lng": 107.6172,
+      "avg_price_tier": 2,
+      "google_place_id": "chIJkopianjis12"
+    },
+    {
+      "id": 13,
+      "name": "Kantin Fisip UNPAD DU",
+      "description": "Kantin kampus UNPAD Dipatiukur yang terbuka untuk umum. Banyak kuliner murah meriah dan dekat fotokopian.",
+      "lat": -6.8932,
+      "lng": 107.619,
+      "avg_price_tier": 1,
+      "google_place_id": "chIJkantinfisip13"
+    },
+    {
+      "id": 14,
+      "name": "Caringin Tilu Coffee Shop",
+      "description": "Kafe bukit di dataran tinggi Bandung dengan pemandangan kota Bandung. Tenang di sore hari, cocok untuk refreshing.",
+      "lat": -6.8576,
+      "lng": 107.6322,
+      "avg_price_tier": 3,
+      "google_place_id": "chIJcaringinTilu14"
+    },
+    {
+      "id": 15,
+      "name": "KFC Dago (24 Jam)",
+      "description": "Gerai KFC 24 jam di simpang Dago. Wi-Fi gratis lumayan cepat dan lokasinya strategis dekat pusat kos mahasiswa.",
+      "lat": -6.8855,
+      "lng": 107.614,
+      "avg_price_tier": 2,
+      "google_place_id": "chIJKfcDago15"
+    },
+    {
+      "id": 16,
+      "name": "Aesthetic Study Hub",
+      "description": "Kafe modern dengan interior aesthetic, workspace luas, dan atmosphere tenang.",
+      "lat": -6.9485,
+      "lng": 107.64880000000001,
+      "avg_price_tier": 2,
+      "google_place_id": "gplace_mock_1780007380372_1"
+    },
+    {
+      "id": 17,
+      "name": "Warmindo & Coworking Rakyat",
+      "description": "Warmindo 24 jam murah meriah, banyak colokan, wifi super kencang.",
+      "lat": -6.9508,
+      "lng": 107.65190000000001,
+      "avg_price_tier": 1,
+      "google_place_id": "gplace_mock_1780007380372_2"
+    },
+    {
+      "id": 18,
+      "name": "Ganesha Printing & Library",
+      "description": "Tempat print dokumen, fotokopi, lengkap dengan perpustakaan mini dan area baca.",
+      "lat": -6.9478,
+      "lng": 107.65050000000001,
+      "avg_price_tier": 1,
+      "google_place_id": "gplace_mock_1780007380372_3"
+    },
+    {
+      "id": 19,
+      "name": "Aesthetic Study Hub",
+      "description": "Kafe modern dengan interior aesthetic, workspace luas, dan atmosphere tenang.",
+      "lat": -6.925310266168594,
+      "lng": 107.72541209106447,
+      "avg_price_tier": 2,
+      "google_place_id": "gplace_mock_1780009439836_1"
+    },
+    {
+      "id": 20,
+      "name": "Warmindo & Coworking Rakyat",
+      "description": "Warmindo 24 jam murah meriah, banyak colokan, wifi super kencang.",
+      "lat": -6.927610266168594,
+      "lng": 107.72851209106447,
+      "avg_price_tier": 1,
+      "google_place_id": "gplace_mock_1780009439836_2"
+    },
+    {
+      "id": 21,
+      "name": "Ganesha Printing & Library",
+      "description": "Tempat print dokumen, fotokopi, lengkap dengan perpustakaan mini dan area baca.",
+      "lat": -6.924610266168594,
+      "lng": 107.72711209106447,
+      "avg_price_tier": 1,
+      "google_place_id": "gplace_mock_1780009439836_3"
+    },
+    {
+      "id": 101,
+      "name": "Fotokopi & Print Kawan Binus Paskal",
+      "description": "Tempat print tugas dan jilid makalah paling dekat dari Binus. Harganya mahasiswa banget dan hasil printnya rapi.",
+      "lat": -6.9145,
+      "lng": 107.593,
+      "avg_price_tier": 1,
+      "google_place_id": "mock_binus_print"
+    },
+    {
+      "id": 102,
+      "name": "Warmindo Paskal 24 Jam",
+      "description": "Penyelamat anak Binus saat kelaparan malam hari habis nugas. Magelangan dan es teh manisnya juara.",
+      "lat": -6.9158,
+      "lng": 107.594,
+      "avg_price_tier": 1,
+      "google_place_id": "mock_binus_warmindo"
+    },
+    {
+      "id": 103,
+      "name": "Laundry Kiloan Bersih Paskal",
+      "description": "Laundry andalan mahasiswa kost sekitar Binus. Murah, wangi, dan bisa antar jemput ke kost.",
+      "lat": -6.916,
+      "lng": 107.5925,
+      "avg_price_tier": 1,
+      "google_place_id": "mock_binus_laundry"
+    },
+    {
+      "id": 104,
+      "name": "Lo.Ka.Si Coffee & Space (Paskal)",
+      "description": "Cabang Lo.Ka.Si di area Paskal. Cocok untuk kerja kelompok dengan Wi-Fi kencang dan banyak colokan.",
+      "lat": -6.9135,
+      "lng": 107.591,
+      "avg_price_tier": 2,
+      "google_place_id": "mock_binus_lokasi"
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "tag_name": "Quiet"
+    },
+    {
+      "id": 2,
+      "tag_name": "Good Wi-Fi"
+    },
+    {
+      "id": 3,
+      "tag_name": "Many charging ports"
+    },
+    {
+      "id": 4,
+      "tag_name": "24 hours"
+    },
+    {
+      "id": 5,
+      "tag_name": "Printer nearby"
+    }
+  ],
+  "place_tags": [
+    {
+      "place_id": 1,
+      "tag_id": 2,
+      "confidence_score": 12
+    },
+    {
+      "place_id": 1,
+      "tag_id": 3,
+      "confidence_score": 8
+    },
+    {
+      "place_id": 2,
+      "tag_id": 1,
+      "confidence_score": -2
+    },
+    {
+      "place_id": 3,
+      "tag_id": 1,
+      "confidence_score": 25
+    },
+    {
+      "place_id": 3,
+      "tag_id": 2,
+      "confidence_score": 5
+    },
+    {
+      "place_id": 4,
+      "tag_id": 2,
+      "confidence_score": 18
+    },
+    {
+      "place_id": 4,
+      "tag_id": 3,
+      "confidence_score": 22
+    },
+    {
+      "place_id": 4,
+      "tag_id": 4,
+      "confidence_score": 30
+    },
+    {
+      "place_id": 5,
+      "tag_id": 5,
+      "confidence_score": 40
+    },
+    {
+      "place_id": 6,
+      "tag_id": 1,
+      "confidence_score": 15
+    },
+    {
+      "place_id": 7,
+      "tag_id": 2,
+      "confidence_score": 35
+    },
+    {
+      "place_id": 7,
+      "tag_id": 3,
+      "confidence_score": 38
+    },
+    {
+      "place_id": 8,
+      "tag_id": 1,
+      "confidence_score": 20
+    },
+    {
+      "place_id": 8,
+      "tag_id": 2,
+      "confidence_score": 7
+    },
+    {
+      "place_id": 9,
+      "tag_id": 2,
+      "confidence_score": 28
+    },
+    {
+      "place_id": 9,
+      "tag_id": 3,
+      "confidence_score": 24
+    },
+    {
+      "place_id": 9,
+      "tag_id": 1,
+      "confidence_score": 14
+    },
+    {
+      "place_id": 10,
+      "tag_id": 2,
+      "confidence_score": 11
+    },
+    {
+      "place_id": 10,
+      "tag_id": 3,
+      "confidence_score": 10
+    },
+    {
+      "place_id": 11,
+      "tag_id": 2,
+      "confidence_score": 15
+    },
+    {
+      "place_id": 11,
+      "tag_id": 3,
+      "confidence_score": 12
+    },
+    {
+      "place_id": 12,
+      "tag_id": 3,
+      "confidence_score": 5
+    },
+    {
+      "place_id": 13,
+      "tag_id": 5,
+      "confidence_score": 12
+    },
+    {
+      "place_id": 14,
+      "tag_id": 1,
+      "confidence_score": 8
+    },
+    {
+      "place_id": 15,
+      "tag_id": 2,
+      "confidence_score": 11
+    },
+    {
+      "place_id": 15,
+      "tag_id": 4,
+      "confidence_score": 24
+    },
+    {
+      "place_id": 16,
+      "tag_id": 2,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 16,
+      "tag_id": 3,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 17,
+      "tag_id": 2,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 17,
+      "tag_id": 3,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 18,
+      "tag_id": 2,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 18,
+      "tag_id": 3,
+      "confidence_score": 2
+    },
+    {
+      "place_id": 10,
+      "tag_id": 1,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 10,
+      "tag_id": 4,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 10,
+      "tag_id": 5,
+      "confidence_score": 0
+    },
+    {
+      "place_id": 19,
+      "tag_id": 2,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 19,
+      "tag_id": 3,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 20,
+      "tag_id": 2,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 20,
+      "tag_id": 3,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 21,
+      "tag_id": 2,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 21,
+      "tag_id": 3,
+      "confidence_score": 1
+    },
+    {
+      "place_id": 101,
+      "tag_id": 5,
+      "confidence": 25
+    },
+    {
+      "place_id": 101,
+      "tag_id": 1,
+      "confidence": 0
+    },
+    {
+      "place_id": 102,
+      "tag_id": 4,
+      "confidence": 45
+    },
+    {
+      "place_id": 102,
+      "tag_id": 2,
+      "confidence": 5
+    },
+    {
+      "place_id": 104,
+      "tag_id": 2,
+      "confidence": 30
+    },
+    {
+      "place_id": 104,
+      "tag_id": 3,
+      "confidence": 20
+    },
+    {
+      "place_id": 104,
+      "tag_id": 1,
+      "confidence": 15,
+      "confidence_score": 1
+    }
+  ],
+  "reviews": [
+    {
+      "id": 1,
+      "place_id": 1,
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "username": "budi_itb",
+      "rating": 4,
+      "comment": "Kopinya enak banget, suasananya asik buat nugas sore-sore. Tapi kalau malam agak rame.",
+      "created_at": "2026-05-10T12:00:00Z"
+    },
+    {
+      "id": 2,
+      "place_id": 3,
+      "user_id": "22222222-2222-2222-2222-222222222222",
+      "username": "anisa_unpad",
+      "rating": 5,
+      "comment": "Tempat terwajib kalau lagi stress nulis skripsi. Tenang banget dan wangi buku lama.",
+      "created_at": "2026-05-15T09:30:00Z"
+    },
+    {
+      "id": 3,
+      "place_id": 7,
+      "user_id": "33333333-3333-3333-3333-333333333333",
+      "username": "agus_upi",
+      "rating": 4,
+      "comment": "Colokan melimpah, wifi stabil. Sangat menunjang kebutuhan push-rank di kala jenuh belajar.",
+      "created_at": "2026-05-20T18:45:00Z"
+    },
+    {
+      "id": 4,
+      "place_id": 2,
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "username": "budi_itb",
+      "rating": 5,
+      "comment": "Gila porsi nasi ayamnya banyak banget! Sambalnya pedas gila. Penyelamat anak kost di akhir bulan.",
+      "created_at": "2026-05-22T13:10:00Z"
+    },
+    {
+      "id": 5,
+      "place_id": 4,
+      "user_id": "44444444-4444-4444-4444-444444444444",
+      "username": "reza_itb",
+      "rating": 4,
+      "comment": "Selalu jadi andalan kalau wifi kosan mati tengah malam. Banyak colokan di pojokan.",
+      "created_at": "2026-05-25T02:00:00Z"
+    },
+    {
+      "id": 6,
+      "place_id": 1,
+      "user_id": "11111111-1111-1111-1111-111111111111",
+      "username": "budi_itb",
+      "rating": 5,
+      "comment": "Superb!",
+      "created_at": "2026-05-28T22:29:40.367Z"
+    },
+    {
+      "id": 7,
+      "place_id": 10,
+      "user_id": "user-u6e47n4da",
+      "username": "McLennon",
+      "rating": 5,
+      "comment": "Mantapp",
+      "created_at": "2026-05-28T22:59:58.343Z"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "username": "budi_itb",
+      "campus_affiliation": "Institut Teknologi Bandung",
+      "created_at": "2026-05-01T00:00:00Z"
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "username": "anisa_unpad",
+      "campus_affiliation": "Universitas Padjadjaran",
+      "created_at": "2026-05-02T00:00:00Z"
+    },
+    {
+      "id": "33333333-3333-3333-3333-333333333333",
+      "username": "agus_upi",
+      "campus_affiliation": "Universitas Pendidikan Indonesia",
+      "created_at": "2026-05-03T00:00:00Z"
+    },
+    {
+      "id": "44444444-4444-4444-4444-444444444444",
+      "username": "reza_itb",
+      "campus_affiliation": "Institut Teknologi Bandung",
+      "created_at": "2026-05-04T00:00:00Z"
+    },
+    {
+      "id": "user-u6e47n4da",
+      "username": "McLennon",
+      "campus_affiliation": "Bina Nusantara University ",
+      "created_at": "2026-05-28T22:57:15.000Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "11111111-1111-1111-1111-111111111111",
+      "email": "budi@student.itb.ac.id",
+      "password": "password123"
+    },
+    {
+      "id": "22222222-2222-2222-2222-222222222222",
+      "email": "anisa@student.unpad.ac.id",
+      "password": "password123"
+    },
+    {
+      "id": "33333333-3333-3333-3333-333333333333",
+      "email": "agus@student.upi.edu",
+      "password": "password123"
+    },
+    {
+      "id": "44444444-4444-4444-4444-444444444444",
+      "email": "reza@student.itb.ac.id",
+      "password": "password123"
+    },
+    {
+      "id": "user-u6e47n4da",
+      "email": "daffa.adira@binus.ac.id",
+      "password": "password123"
+    }
+  ]
+}
