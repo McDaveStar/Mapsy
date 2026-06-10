@@ -8,18 +8,6 @@
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "backend/server.js"
-    },
-    {
-      "src": "/styles.css",
-      "dest": "/frontend/styles.css"
-    },
-    {
-      "src": "/app.js",
-      "dest": "/frontend/app.js"
-    },
-    {
       "src": "/(.*)",
       "dest": "backend/server.js"
     }
