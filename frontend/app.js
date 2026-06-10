@@ -1,4 +1,4 @@
-// StudentMap Client Application Logic
+// Mapsy Client Application Logic
 // Handles interactive mapping, filtering, search query parsing, reviews, and community validations.
 
 // Default center: BINUS University Bandung (Paskal)
@@ -545,12 +545,12 @@ function toggleAuthForms(toRegister = true) {
     if (toRegister) {
         loginForm.classList.add('hidden');
         registerForm.classList.remove('hidden');
-        title.textContent = "Daftar StudentMap";
+        title.textContent = "Daftar Mapsy";
         desc.textContent = "Daftar untuk berkontribusi validasi info & review mahasiswa.";
     } else {
         loginForm.classList.remove('hidden');
         registerForm.classList.add('hidden');
-        title.textContent = "Masuk ke StudentMap";
+        title.textContent = "Masuk ke Mapsy";
         desc.textContent = "Dapatkan akses untuk memberikan ulasan & validasi tag lokasi.";
     }
 }

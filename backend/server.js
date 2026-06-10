@@ -344,7 +344,7 @@ app.post('/api/auth/login', async (req, res) => {
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`=======================================================`);
-        console.log(`🌐 StudentMap API & Web Client serving on port ${PORT}`);
+        console.log(`🌐 Mapsy API & Web Client serving on port ${PORT}`);
         console.log(`🔗 Access the web app at: http://localhost:${PORT}`);
         console.log(`📦 Database Mode: ${DB.isMock() ? 'LOCAL MOCK DB' : 'LIVE SUPABASE'}`);
         console.log(`=======================================================`);

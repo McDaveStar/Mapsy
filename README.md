@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://img.shields.io/badge/StudentMap-v1.0-blue?style=for-the-badge&logo=map&logoColor=white" alt="StudentMap Badge"/>
+  <img src="https://img.shields.io/badge/Mapsy-v1.0-blue?style=for-the-badge&logo=map&logoColor=white" alt="Mapsy Badge"/>
 </h1>
 
 <h3 align="center">🗺️ Smart Student Location Discovery Platform</h3>
@@ -55,8 +55,8 @@
 
 1. **Clone repositori ini**
    ```bash
-   git clone https://github.com/[USERNAME]/StudentMap.git
-   cd StudentMap
+   git clone https://github.com/[USERNAME]/Mapsy.git
+   cd Mapsy
    ```
 
 2. **Install dependensi backend**
@@ -89,7 +89,7 @@
 ## 📁 Struktur Proyek
 
 ```
-StudentMap/
+Mapsy/
 ├── backend/
 │   ├── data/
 │   │   └── mockDb.json      # Mock database lokal (JSON)

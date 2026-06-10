@@ -1,7 +1,7 @@
 {
-  "name": "studentmap-backend",
+  "name": "mapsy-backend",
   "version": "1.0.0",
-  "description": "Backend API server for StudentMap Platform",
+  "description": "Backend API server for Mapsy Platform",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

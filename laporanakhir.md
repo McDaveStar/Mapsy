@@ -1,4 +1,4 @@
-# **StudentMap: Platform Penyelamat Mahasiswa Berbasis Peta Geospasial dengan Fitur Smart Search by Situation dan Community Validation**
+# **Mapsy: Platform Penyelamat Mahasiswa Berbasis Peta Geospasial dengan Fitur Smart Search by Situation dan Community Validation**
 
 ---
 
@@ -11,9 +11,9 @@
 ---
 
 ### **Abstract**
-*Mahasiswa perguruan tinggi, terutama mahasiswa baru dan anak kost, seringkali menghadapi kendala saat mencari tempat yang kondusif untuk kebutuhan akademik maupun kehidupan sehari-hari di sekitar wilayah kampus. Aplikasi pemetaan komersial konvensional seperti Google Maps cenderung menyajikan rekomendasi yang terlalu umum, dipenuhi iklan komersial, dan tidak memiliki filter spesifik yang disesuaikan dengan kebutuhan khas mahasiswa. Makalah ini memperkenalkan **StudentMap**, sebuah platform peta geospasial hiper-lokal terdesentralisasi yang dirancang khusus untuk memecahkan masalah pencarian lokasi mahasiswa. Sistem ini mengintegrasikan dua inovasi utama: **Smart Search by Situation** yang menggunakan Dictionary-Driven Keyword Parser untuk mengekstraksi kebutuhan situasional pengguna tanpa memerlukan API LLM berbayar, serta **Community Validation** yang menerapkan sistem upvote/downvote tag secara kolaboratif guna mencegah kedaluwarsa data. StudentMap dikembangkan menggunakan arsitektur Decoupled Client-Server dengan frontend Vanilla JavaScript interaktif berbantuan Leaflet.js, serta backend Node.js/Express dengan database PostgreSQL (Supabase/PostGIS) dan fallback Mock Database lokal. Hasil pengujian menunjukkan bahwa platform ini mampu memberikan rekomendasi tempat secara instan berdasarkan preferensi harga (under Rp30k), ketersediaan daya listrik (colokan), tingkat ketenangan, koneksi Wi-Fi, hingga layanan printer terdekat.*
+*Mahasiswa perguruan tinggi, terutama mahasiswa baru dan anak kost, seringkali menghadapi kendala saat mencari tempat yang kondusif untuk kebutuhan akademik maupun kehidupan sehari-hari di sekitar wilayah kampus. Aplikasi pemetaan komersial konvensional seperti Google Maps cenderung menyajikan rekomendasi yang terlalu umum, dipenuhi iklan komersial, dan tidak memiliki filter spesifik yang disesuaikan dengan kebutuhan khas mahasiswa. Makalah ini memperkenalkan **Mapsy**, sebuah platform peta geospasial hiper-lokal terdesentralisasi yang dirancang khusus untuk memecahkan masalah pencarian lokasi mahasiswa. Sistem ini mengintegrasikan dua inovasi utama: **Smart Search by Situation** yang menggunakan Dictionary-Driven Keyword Parser untuk mengekstraksi kebutuhan situasional pengguna tanpa memerlukan API LLM berbayar, serta **Community Validation** yang menerapkan sistem upvote/downvote tag secara kolaboratif guna mencegah kedaluwarsa data. Mapsy dikembangkan menggunakan arsitektur Decoupled Client-Server dengan frontend Vanilla JavaScript interaktif berbantuan Leaflet.js, serta backend Node.js/Express dengan database PostgreSQL (Supabase/PostGIS) dan fallback Mock Database lokal. Hasil pengujian menunjukkan bahwa platform ini mampu memberikan rekomendasi tempat secara instan berdasarkan preferensi harga (under Rp30k), ketersediaan daya listrik (colokan), tingkat ketenangan, koneksi Wi-Fi, hingga layanan printer terdekat.*
 
-**Keywords—** *StudentMap, Peta Geospasial, Smart Search, Community Validation, Node.js, Leaflet.js, Supabase.*
+**Keywords—** *Mapsy, Peta Geospasial, Smart Search, Community Validation, Node.js, Leaflet.js, Supabase.*
 
 ---
 
@@ -27,7 +27,7 @@ Bagi mahasiswa perkotaan yang menuntut efisiensi tinggi, menemukan lokasi fisik 
 4. **Data tag yang mudah usang**: Kecepatan internet Wi-Fi kafe, jam operasional sesungguhnya, atau tingkat kebisingan sering berubah tanpa adanya pembaruan cepat dari komunitas pengguna.
 
 ### **B. Solusi yang Diusulkan (Proposed Solution)**
-Untuk mengatasi keterbatasan tersebut, dikembangkan **StudentMap**, sebuah Single Page Application (SPA) berbasis peta interaktif yang berfokus pada visualisasi hiper-lokal di sekitar kampus (contoh uji coba: area BINUS University Bandung Paskal, ITB, dan UNPAD Dipatiukur). Solusi utama yang dihadirkan platform ini mencakup:
+Untuk mengatasi keterbatasan tersebut, dikembangkan **Mapsy**, sebuah Single Page Application (SPA) berbasis peta interaktif yang berfokus pada visualisasi hiper-lokal di sekitar kampus (contoh uji coba: area BINUS University Bandung Paskal, ITB, dan UNPAD Dipatiukur). Solusi utama yang dihadirkan platform ini mencakup:
 * **Smart Search by Situation**: Pengguna cukup memasukkan kalimat natural (seperti: *"butuh kafe yang tenang untuk nugas sampai malam"*). Mesin parser di backend akan secara otomatis menerjemahkannya menjadi tag terstruktur (`Quiet`, `Good Wi-Fi`, `24 hours`) tanpa biaya API AI yang mahal.
 * **Community Validation (Sistem Anti-Data Usang)**: Setiap tag pada suatu lokasi dapat di-upvote atau di-downvote oleh mahasiswa yang telah masuk (login) menggunakan email kampus mereka. Tag yang mendapatkan skor negatif akan otomatis disembunyikan dari peta.
 * **Algoritma Rating Berbobot (Temporal Decay)**: Sistem ulasan memberikan bobot ganda (2.0x) pada ulasan 30 hari terakhir dibanding ulasan lama untuk menjaga relevansi situasi terkini suatu tempat.
@@ -37,7 +37,7 @@ Untuk mengatasi keterbatasan tersebut, dikembangkan **StudentMap**, sebuah Singl
 
 ## **Chapter 2 - Literature Review**
 
-Pengembangan platform StudentMap didasarkan pada beberapa teori rekayasa perangkat lunak dan teknologi web modern:
+Pengembangan platform Mapsy didasarkan pada beberapa teori rekayasa perangkat lunak dan teknologi web modern:
 1. **Decoupled Client-Server Architecture**: Pemisahan yang jelas antara frontend (presentasi data) dan backend (pemrosesan data) menggunakan RESTful API. Hal ini mempermudah migrasi server ke infrastruktur serverless (misal: Vercel) dan pengujian independen.
 2. **Geospasial & Formula Haversine**: Untuk menyortir lokasi terdekat tanpa bergantung penuh pada GIS eksternal, digunakan formula Haversine pada server mock untuk menghitung jarak lingkaran besar antara dua titik koordinat latitude/longitude di bumi:
    $$d = 2R \arcsin\left(\sqrt{\sin^2\left(\frac{\Delta \phi}{2}\right) + \cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta \lambda}{2}\right)}\right)$$
@@ -50,7 +50,7 @@ Pengembangan platform StudentMap didasarkan pada beberapa teori rekayasa perangk
 ## **Chapter 3 - Methods**
 
 ### **A. SDLC & Development Process (Agile Scrum)**
-Pengembangan StudentMap menggunakan metodologi **Agile Scrum** yang dibagi ke dalam 3 tahapan sprint utama masing-masing berdurasi 2 minggu:
+Pengembangan Mapsy menggunakan metodologi **Agile Scrum** yang dibagi ke dalam 3 tahapan sprint utama masing-masing berdurasi 2 minggu:
 * **Sprint 1: Database & Authentication**: Perancangan skema tabel PostgreSQL dan integrasi sistem login/register pengguna (baik versi Supabase riil maupun Mock Auth lokal).
 * **Sprint 2: Core API & Geospasial**: Implementasi server Express, pembuatan logika dictionary parser untuk kueri situasi, serta kalkulasi pencarian radius geospasial tempat.
 * **Sprint 3: Frontend & Visual Polish**: Pembuatan antarmuka web interaktif menggunakan Tailwind CSS, integrasi peta Leaflet.js, implementasi transisi bottom sheet, dan penambahan animasi pin glow.
@@ -85,7 +85,7 @@ Struktur penyimpanan data dirancang relasional untuk efisiensi upvote tag dan re
 * **Deployment target**: Serverless deployment via Vercel (`vercel.json`).
 
 ### **B. Hasil Implementasi Fitur & Antarmuka**
-Aplikasi StudentMap berhasil diimplementasikan dengan antarmuka bertema gelap (*dark mode*) yang elegan dan responsif:
+Aplikasi Mapsy berhasil diimplementasikan dengan antarmuka bertema gelap (*dark mode*) yang elegan dan responsif:
 1. **Peta Interaktif (Leaflet.js)**: Menampilkan posisi kampus BINUS Bandung sebagai episentrum pencarian beserta pin penanda tempat-tempat di sekitarnya. Pin marker memiliki animasi denyut (*pulsing halo animation*) dan berubah warna menjadi merah muda menyala saat dipilih.
 2. **Smart Search Dashboard**: Bilah pencarian menerima kalimat alami mahasiswa. Misalnya, menginput kata *"butuh tempat print murah deket binus"* secara otomatis mengaktifkan filter tag `Printer nearby` dan filter harga `Murah` (Price tier 1).
 3. **Bottom Sheet Details**: Menampilkan rincian lengkap lokasi, jarak presisi dalam meter dari kampus, tag validasi komunitas, tombol navigasi langsung ke rute Google Maps, serta ulasan mahasiswa.
@@ -96,7 +96,7 @@ Aplikasi StudentMap berhasil diimplementasikan dengan antarmuka bertema gelap (*
 
 ## **Chapter 5 - Conclusion**
 
-Proyek StudentMap berhasil menjawab kebutuhan mahasiswa akan platform pemetaan lokasi yang berbasis situasi dan anggaran keuangan mahasiswa. Dengan memanfaatkan logika parser kata kunci sederhana, platform ini menghemat biaya operasional karena tidak memerlukan pemrosesan LLM berbiaya tinggi. Keberadaan sistem validasi komunitas (upvote/downvote tag) terbukti efektif menyaring keakuratan data secara demokratis tanpa memerlukan administrator manual. Pengembangan ke depan akan memfokuskan pada integrasi pencarian semantik tingkat lanjut menggunakan *Supabase pgvector embeddings* serta peluncuran aplikasi mobile hybrid.
+Proyek Mapsy berhasil menjawab kebutuhan mahasiswa akan platform pemetaan lokasi yang berbasis situasi dan anggaran keuangan mahasiswa. Dengan memanfaatkan logika parser kata kunci sederhana, platform ini menghemat biaya operasional karena tidak memerlukan pemrosesan LLM berbiaya tinggi. Keberadaan sistem validasi komunitas (upvote/downvote tag) terbukti efektif menyaring keakuratan data secara demokratis tanpa memerlukan administrator manual. Pengembangan ke depan akan memfokuskan pada integrasi pencarian semantik tingkat lanjut menggunakan *Supabase pgvector embeddings* serta peluncuran aplikasi mobile hybrid.
 
 ---
 
@@ -114,7 +114,7 @@ Penulis mengucapkan terima kasih kepada dosen pembimbing mata kuliah Rekayasa Pe
 ---
 
 ### **Open Data Access**
-Seluruh kode program frontend, server backend, rancangan skema database SQL, serta mock data lokasi uji coba Bandung tersedia secara terbuka untuk publik dan dapat diakses melalui repositori GitHub kelompok kami di: `https://github.com/[UsernameGitHub]/StudentMap`
+Seluruh kode program frontend, server backend, rancangan skema database SQL, serta mock data lokasi uji coba Bandung tersedia secara terbuka untuk publik dan dapat diakses melalui repositori GitHub kelompok kami di: `https://github.com/[UsernameGitHub]/Mapsy`
 
 ---
 

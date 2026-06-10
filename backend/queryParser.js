@@ -1,5 +1,5 @@
 /**
- * Smart Search by Situation: Dictionary-Driven Keyword Parser for StudentMap
+ * Smart Search by Situation: Dictionary-Driven Keyword Parser for Mapsy
  * Parses natural language input from students into database tags and price filters.
  */
 function parseStudentQuery(userInput) {
