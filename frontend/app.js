@@ -546,7 +546,10 @@ function populateBottomSheet(place) {
         L.latLng(KAMPUS_BINUS_COORDS.lat, KAMPUS_BINUS_COORDS.lng).distanceTo(L.latLng(place.latitude, place.longitude)) : 0
     );
 
-    document.getElementById('placeCoverImg').src = getPlaceImageUrl(place);
+    const coverImg = document.getElementById('placeCoverImg');
+    if (coverImg) {
+        coverImg.src = getPlaceImageUrl(place);
+    }
     document.getElementById('placeName').textContent = place.name;
     document.getElementById('placeDistance').textContent = `${distanceMeters} m dari Kampus BINUS`;
     document.getElementById('placeDescription').textContent = place.description;
@@ -846,8 +849,10 @@ function initEventListeners() {
         const name = document.getElementById('newPlaceName').value.trim();
         const desc = document.getElementById('newPlaceDesc').value.trim();
         const tag = document.getElementById('newPlaceTag').value;
-        const avgPriceTier = parseInt(document.getElementById('newPlacePrice').value);
-        const imageUrl = document.getElementById('newPlaceImageUrl').value.trim();
+        const priceEl = document.getElementById('newPlacePrice');
+        const avgPriceTier = priceEl ? parseInt(priceEl.value) : (tag.includes("Affordable") ? 1 : 2);
+        const imgEl = document.getElementById('newPlaceImageUrl');
+        const imageUrl = imgEl ? imgEl.value.trim() : "";
         
         const center = appState.map.getCenter();
 
