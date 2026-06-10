@@ -102,9 +102,9 @@ function initMap() {
         zoomControl: false // Disable default zoom control to reposition it
     }).setView([appState.userLocation.lat, appState.userLocation.lng], 15);
 
-    // Reposition zoom control to bottom right
+    // Reposition zoom control to top right (avoiding floating button overlap)
     L.control.zoom({
-        position: 'bottomright'
+        position: 'topright'
     }).addTo(appState.map);
 
     // OpenStreetMap tiles (CartoDB Positron is light, clean, and not blindingly bright)
@@ -149,6 +149,7 @@ async function fetchPlaces() {
         if (data.success) {
             appState.places = data.places;
             renderMarkers();
+            renderRecommendations();
         } else {
             showToast("Gagal memuat daftar lokasi.", "error");
         }
@@ -156,6 +157,208 @@ async function fetchPlaces() {
         console.error(err);
         showToast("Terjadi kesalahan koneksi database.", "error");
     }
+}
+
+// Unsplash curated images dictionary mapping for high-quality visuals
+const CATEGORY_IMAGES = {
+    coffee: [
+        "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=500&q=80",
+        "https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=500&q=80",
+        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80"
+    ],
+    food: [
+        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80",
+        "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=500&q=80",
+        "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=500&q=80"
+    ],
+    print: [
+        "https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=500&q=80",
+        "https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?auto=format&fit=crop&w=500&q=80"
+    ],
+    library: [
+        "https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=500&q=80",
+        "https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=500&q=80"
+    ],
+    default: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=500&q=80"
+};
+
+function getPlaceImageUrl(place) {
+    if (place.image_url && place.image_url.trim().startsWith("http")) {
+        return place.image_url;
+    }
+    
+    // Fallback based on name keyword and tag mapping
+    const nameLower = place.name.toLowerCase();
+    const tagsCombined = place.tags ? place.tags.map(t => t.name.toLowerCase()).join(" ") : "";
+    
+    // Helper to get image based on index to keep it deterministic per place
+    const getDeterministicImage = (list, id) => {
+        return list[id % list.length];
+    };
+    
+    if (nameLower.includes("kopi") || nameLower.includes("coffee") || nameLower.includes("cafe") || nameLower.includes("kafe") || tagsCombined.includes("wi-fi")) {
+        return getDeterministicImage(CATEGORY_IMAGES.coffee, place.id);
+    }
+    if (nameLower.includes("nasi") || nameLower.includes("warung") || nameLower.includes("makan") || nameLower.includes("mcd") || nameLower.includes("kfc") || nameLower.includes("kantin") || tagsCombined.includes("affordable") || nameLower.includes("warmindo")) {
+        return getDeterministicImage(CATEGORY_IMAGES.food, place.id);
+    }
+    if (nameLower.includes("print") || nameLower.includes("fotocopy") || nameLower.includes("jilid") || tagsCombined.includes("printer")) {
+        return getDeterministicImage(CATEGORY_IMAGES.print, place.id);
+    }
+    if (nameLower.includes("buku") || nameLower.includes("perpustakaan") || nameLower.includes("library") || nameLower.includes("kineruku") || tagsCombined.includes("quiet")) {
+        return getDeterministicImage(CATEGORY_IMAGES.library, place.id);
+    }
+    
+    return CATEGORY_IMAGES.default;
+}
+
+function calculateMatchScore(place) {
+    let score = 0;
+    let factors = 0;
+
+    // 1. Rating contribution (Weight: 30%)
+    const rating = parseFloat(place.avg_rating) || 4.0;
+    score += (rating / 5) * 30;
+    factors += 30;
+
+    // 2. Price Match contribution (Weight: 20%)
+    let priceScore = 0;
+    if (appState.selectedPrice !== null) {
+        if (place.avg_price_tier <= appState.selectedPrice) {
+            priceScore = 100;
+        } else {
+            priceScore = Math.max(0, 100 - (place.avg_price_tier - appState.selectedPrice) * 35);
+        }
+    } else {
+        if (place.avg_price_tier === 1) priceScore = 100;
+        else if (place.avg_price_tier === 2) priceScore = 85;
+        else if (place.avg_price_tier === 3) priceScore = 60;
+        else priceScore = 40;
+    }
+    score += (priceScore / 100) * 20;
+    factors += 20;
+
+    // 3. Distance contribution (Weight: 20%)
+    let distanceScore = 40;
+    if (place.distance_meters !== null && place.distance_meters !== undefined) {
+        const dist = place.distance_meters;
+        if (dist <= 1000) distanceScore = 100;
+        else if (dist <= 3000) distanceScore = 85;
+        else if (dist <= 5000) distanceScore = 65;
+    } else {
+        distanceScore = 75;
+    }
+    score += (distanceScore / 100) * 20;
+    factors += 20;
+
+    // 4. Tag Match contribution (Weight: 30%)
+    let tagScore = 70;
+    if (appState.selectedTags.length > 0) {
+        const matches = appState.selectedTags.filter(filterTag => 
+            place.tags && place.tags.some(t => t.name.toLowerCase() === filterTag.toLowerCase())
+        );
+        tagScore = (matches.length / appState.selectedTags.length) * 100;
+    } else {
+        if (place.tags && place.tags.length > 0) {
+            const sumConfidence = place.tags.reduce((acc, t) => acc + (t.confidence || 0), 0);
+            tagScore = Math.min(100, 70 + sumConfidence * 5);
+        }
+    }
+    score += (tagScore / 100) * 30;
+    factors += 30;
+
+    const finalPercentage = Math.round((score / factors) * 100);
+    return Math.min(100, Math.max(30, finalPercentage));
+}
+
+function renderRecommendations() {
+    const recPanel = document.getElementById('recommendationsPanel');
+    const recList = document.getElementById('recommendationsList');
+    
+    if (!recPanel || !recList) return;
+
+    if (!appState.places || appState.places.length === 0) {
+        recPanel.classList.add('hidden');
+        return;
+    }
+
+    recPanel.classList.remove('hidden');
+    recList.innerHTML = '';
+
+    const processedPlaces = appState.places.map(place => {
+        return {
+            ...place,
+            matchScore: calculateMatchScore(place)
+        };
+    });
+
+    const sortBy = document.getElementById('sortSelect') ? document.getElementById('sortSelect').value : 'match';
+    if (sortBy === 'match') {
+        processedPlaces.sort((a, b) => b.matchScore - a.matchScore);
+    } else if (sortBy === 'distance') {
+        processedPlaces.sort((a, b) => {
+            const distA = a.distance_meters !== null ? a.distance_meters : 999999;
+            const distB = b.distance_meters !== null ? b.distance_meters : 999999;
+            return distA - distB;
+        });
+    } else if (sortBy === 'rating') {
+        processedPlaces.sort((a, b) => b.avg_rating - a.avg_rating);
+    }
+
+    processedPlaces.forEach(place => {
+        const placeImg = getPlaceImageUrl(place);
+        const distanceStr = place.distance_meters !== null && place.distance_meters !== undefined
+            ? (place.distance_meters > 1000 
+                ? `${(place.distance_meters / 1000).toFixed(1)} km` 
+                : `${Math.round(place.distance_meters)} m`)
+            : 'DU Area';
+
+        const card = document.createElement('div');
+        card.className = "flex gap-3 p-2.5 bg-slate-950/40 hover:bg-slate-900/60 border border-slate-800/60 hover:border-slate-700/80 rounded-xl cursor-pointer transition-all active:scale-[0.98] group";
+        
+        let badgeColor = "bg-blue-600/90";
+        if (place.matchScore >= 85) badgeColor = "bg-emerald-600/90";
+        else if (place.matchScore >= 70) badgeColor = "bg-blue-600/90";
+        else badgeColor = "bg-slate-700/90";
+
+        card.innerHTML = `
+            <div class="w-16 h-16 rounded-lg overflow-hidden flex-shrink-0 relative shadow-md font-sans">
+                <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" src="${placeImg}" alt="${place.name}">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+                <div class="absolute top-0.5 left-0.5 ${badgeColor} text-[8px] font-extrabold text-white px-1.5 py-0.5 rounded shadow-lg">
+                    ${place.matchScore}%
+                </div>
+            </div>
+            <div class="flex-1 min-w-0 flex flex-col justify-between">
+                <div>
+                    <h4 class="text-xs font-bold text-white truncate group-hover:text-blue-400 transition-colors">${place.name}</h4>
+                    <p class="text-[10px] text-slate-400 truncate mt-0.5">${place.description}</p>
+                </div>
+                <div class="flex items-center justify-between text-[10px] text-slate-400 mt-1">
+                    <div class="flex items-center gap-1.5 font-bold">
+                        <span class="text-amber-400 flex items-center gap-0.5">
+                            ⭐ ${(parseFloat(place.avg_rating) || 4.0).toFixed(1)}
+                        </span>
+                        <span class="text-slate-600">•</span>
+                        <span class="text-emerald-400">
+                            ${'Rp'.repeat(place.avg_price_tier || 1)}
+                        </span>
+                    </div>
+                    <span class="font-medium text-[9px] text-slate-400 flex items-center gap-0.5">
+                        📍 ${distanceStr}
+                    </span>
+                </div>
+            </div>
+        `;
+
+        card.addEventListener('click', () => {
+            const idx = appState.places.findIndex(p => p.id === place.id);
+            const marker = appState.markers[idx];
+            selectPlace(place.id, marker);
+        });
+
+        recList.appendChild(card);
+    });
 }
 
 // Render markers on the map
@@ -232,6 +435,7 @@ async function handleQuerySearch(query) {
 
             // Render search results
             renderMarkers();
+            renderRecommendations();
             
             // Update results banner
             const banner = document.getElementById('resultsCountBanner');
@@ -342,6 +546,7 @@ function populateBottomSheet(place) {
         L.latLng(KAMPUS_BINUS_COORDS.lat, KAMPUS_BINUS_COORDS.lng).distanceTo(L.latLng(place.latitude, place.longitude)) : 0
     );
 
+    document.getElementById('placeCoverImg').src = getPlaceImageUrl(place);
     document.getElementById('placeName').textContent = place.name;
     document.getElementById('placeDistance').textContent = `${distanceMeters} m dari Kampus BINUS`;
     document.getElementById('placeDescription').textContent = place.description;
@@ -595,6 +800,13 @@ function initEventListeners() {
     // Close sheet
     document.getElementById('closeSheetBtn').addEventListener('click', hideBottomSheet);
 
+    // Sort Select listener
+    if (document.getElementById('sortSelect')) {
+        document.getElementById('sortSelect').addEventListener('change', () => {
+            renderRecommendations();
+        });
+    }
+
     // Search bar submit
     document.getElementById('searchForm').addEventListener('submit', (e) => {
         e.preventDefault();
@@ -634,9 +846,10 @@ function initEventListeners() {
         const name = document.getElementById('newPlaceName').value.trim();
         const desc = document.getElementById('newPlaceDesc').value.trim();
         const tag = document.getElementById('newPlaceTag').value;
+        const avgPriceTier = parseInt(document.getElementById('newPlacePrice').value);
+        const imageUrl = document.getElementById('newPlaceImageUrl').value.trim();
         
         const center = appState.map.getCenter();
-        const avgPriceTier = tag.includes("Affordable") ? 1 : 2;
 
         try {
             const res = await fetch(`${BASE_API_URL}/api/places`, {
@@ -651,7 +864,8 @@ function initEventListeners() {
                     latitude: center.lat,
                     longitude: center.lng,
                     avgPriceTier,
-                    tagName: tag
+                    tagName: tag,
+                    imageUrl
                 })
             });
             const data = await res.json();

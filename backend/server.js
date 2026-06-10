@@ -214,7 +214,7 @@ app.get('/api/places', async (req, res) => {
 // Add a new place (authenticated user-generated content)
 app.post('/api/places', requireAuth, async (req, res) => {
     try {
-        const { name, description, latitude, longitude, avgPriceTier, tagName } = req.body;
+        const { name, description, latitude, longitude, avgPriceTier, tagName, imageUrl } = req.body;
 
         if (!name || !description || latitude === undefined || longitude === undefined || !avgPriceTier) {
             return res.status(400).json({ success: false, error: "Missing required fields." });
@@ -226,7 +226,8 @@ app.post('/api/places', requireAuth, async (req, res) => {
             latitude: parseFloat(latitude),
             longitude: parseFloat(longitude),
             avgPriceTier: parseInt(avgPriceTier),
-            tagName: tagName || ""
+            tagName: tagName || "",
+            imageUrl: imageUrl || ""
         });
 
         res.status(201).json({ success: true, place: newPlace });

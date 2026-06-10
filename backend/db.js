@@ -151,6 +151,20 @@ const DB = {
 
                     place.tags = placeTags;
 
+                    // Get average rating and reviews count
+                    const { data: reviews, error: rErr } = await dbClient
+                        .from('reviews')
+                        .select('rating, created_at')
+                        .eq('place_id', place.id);
+                    
+                    let avgRating = 4.0;
+                    if (!rErr && reviews && reviews.length > 0) {
+                        avgRating = calculateWeightedAverage(reviews);
+                    }
+                    place.avg_rating = avgRating;
+                    place.reviews_count = reviews ? reviews.length : 0;
+                    place.image_url = place.image_url || "";
+
                     // Apply filters
                     // 1. Tags filter (must contain all selected tags)
                     const matchesTags = tags.every(t => placeTags.some(pt => pt.name.toLowerCase() === t.toLowerCase()));
@@ -177,6 +191,7 @@ const DB = {
             longitude: p.lng,
             avg_price_tier: p.avg_price_tier,
             google_place_id: p.google_place_id,
+            image_url: p.image_url || "",
             distance_meters: center ? haversineDistance(center.lat, center.lng, p.lat, p.lng) : null
         }));
 
@@ -186,7 +201,7 @@ const DB = {
             results.sort((a, b) => a.distance_meters - b.distance_meters);
         }
 
-        // Hydrate tags
+        // Hydrate tags & ratings
         results = results.map(p => {
             const relTags = db.place_tags
                 .filter(pt => pt.place_id === p.id && pt.confidence_score >= 0)
@@ -198,7 +213,9 @@ const DB = {
                         confidence: pt.confidence_score
                     };
                 });
-            return { ...p, tags: relTags };
+            const placeReviews = db.reviews.filter(r => r.place_id === p.id);
+            const avgRating = placeReviews.length > 0 ? calculateWeightedAverage(placeReviews) : 4.0;
+            return { ...p, tags: relTags, avg_rating: avgRating, reviews_count: placeReviews.length };
         });
 
         // Filter tags
@@ -374,7 +391,7 @@ const DB = {
 
     // 3b. Add Place (User-Contributed Spot)
     addPlace: async (placeData) => {
-        const { name, description, latitude, longitude, avgPriceTier, tagName } = placeData;
+        const { name, description, latitude, longitude, avgPriceTier, tagName, imageUrl } = placeData;
 
         if (!useMock) {
             try {
@@ -422,6 +439,7 @@ const DB = {
                         longitude: parseFloat(longitude),
                         avg_price_tier: newPlace[0].avg_price_tier,
                         google_place_id: newPlace[0].google_place_id,
+                        image_url: "",
                         tags: []
                     };
                 }
@@ -440,7 +458,8 @@ const DB = {
             lat: parseFloat(latitude),
             lng: parseFloat(longitude),
             avg_price_tier: parseInt(avgPriceTier),
-            google_place_id: `ugc_spot_${Date.now()}`
+            google_place_id: `ugc_spot_${Date.now()}`,
+            image_url: imageUrl || ""
         };
 
         db.places.push(newPlaceObj);
@@ -464,6 +483,7 @@ const DB = {
             longitude: parseFloat(longitude),
             avg_price_tier: parseInt(avgPriceTier),
             google_place_id: newPlaceObj.google_place_id,
+            image_url: newPlaceObj.image_url,
             tags: tagObj ? [{ id: tagObj.id, name: tagObj.tag_name, confidence: 1 }] : []
         };
     },
