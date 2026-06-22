@@ -118,9 +118,9 @@ Mapsy/
 | Nama | NIM | Peran |
 |---|---|---|
 | **Daffa Adira Pratama** | - | Backend API, Database, Deployment |
-| **[Anggota 2]** | - | Frontend UI/UX, Tailwind CSS |
-| **[Anggota 3]** | - | Smart Search Parser, Dokumentasi |
-| **[Anggota 4]** | - | Data Seeding, Pengujian, Referensi |
+| **Samuel Handyanto Ongko Saputra** | - | Frontend UI/UX, Tailwind CSS |
+| **Nicholas** | - | Smart Search Parser, Dokumentasi |
+| **Christian Devinchie** | - | Data Seeding, Pengujian, Referensi |
 
 ---
 
