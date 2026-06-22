@@ -117,10 +117,10 @@ Mapsy/
 
 | Nama | NIM | Peran |
 |---|---|---|
-| **Daffa Adira Pratama** | - | Backend API, Database, Deployment |
-| **Samuel Handyanto Ongko Saputra** | - | Frontend UI/UX, Tailwind CSS |
-| **Nicholas** | - | Smart Search Parser, Dokumentasi |
-| **Christian Devinchie** | - | Data Seeding, Pengujian, Referensi |
+| **Daffa Adira Pratama** | 2802498204 | Backend API, Database, Deployment |
+| **Samuel Handyanto Ongko Saputra** | 2802408871 | Frontend UI/UX, Tailwind CSS |
+| **Nicholas** | 2802491740 | Smart Search Parser, Dokumentasi |
+| **Christian Devinchie** | 2802396764 | Data Seeding, Pengujian, Referensi |
 
 ---
 
